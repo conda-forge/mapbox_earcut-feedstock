@@ -1,5 +1,5 @@
 {% set name = "mapbox_earcut" %}
-{% set version = "0.12.10" %}
+{% set version = "1.0.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,25 +7,24 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 50d995673ac9ce8cb9abb7ab64b709d611c1d27557907e00b631b5272345c453
-  patches:
-    - 0002-removed-A-flag-for-Windows-builds.patch
-    - 0003-further-removed-m-option.patch
+  sha256: 997ab14b9afbc14b1aede880b8f57efc7f28d6811a08db0adf1804b63bab0d9b
+
+# leaving these in in case we still need something like that for Windows
+#  patches:
+#    - 0002-removed-A-flag-for-Windows-builds.patch
+#    - 0003-further-removed-m-option.patch
 
 build:
-  number: 2
-  script: "{{ PYTHON }} -m pip install . -vv"
+  number: 0
+  script: "{{ PYTHON }} -m pip install -vv ."
 
 requirements:
   build:
     - {{ compiler('cxx') }}
     - cmake
-    - numpy
   host:
     - python
-    - setuptools_scm
-    - setuptools
-    - pip
+    - pybind11
   run:
     - python
     - numpy
@@ -39,7 +38,6 @@ about:
   license: "ISC AND BSD-3-Clause"
   license_file:
     - LICENSE.md
-    - pybind11/LICENSE
     - include/mapbox/LICENSE
   summary: "Python version of Mapbox Earcut library: fast and quite robust triangulation of 2D polygons."
   description: |
