@@ -25,6 +25,8 @@ requirements:
   host:
     - python
     - pybind11
+    - pip
+    - setuptools
   run:
     - python
     - numpy
