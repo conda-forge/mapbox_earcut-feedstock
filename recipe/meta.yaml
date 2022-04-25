@@ -9,11 +9,6 @@ source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 997ab14b9afbc14b1aede880b8f57efc7f28d6811a08db0adf1804b63bab0d9b
 
-# leaving these in in case we still need something like that for Windows
-#  patches:
-#    - 0002-removed-A-flag-for-Windows-builds.patch
-#    - 0003-further-removed-m-option.patch
-
 build:
   number: 0
   script: "{{ PYTHON }} -m pip install -vv ."
