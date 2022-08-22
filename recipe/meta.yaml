@@ -10,13 +10,15 @@ source:
   sha256: 997ab14b9afbc14b1aede880b8f57efc7f28d6811a08db0adf1804b63bab0d9b
 
 build:
-  number: 3
+  number: 4
   script: "{{ PYTHON }} -m pip install -vv ."
 
 requirements:
   build:
     - {{ compiler('cxx') }}
     - cmake
+    - python  # [buiold_platform != target_platform]
+    - cross-python  # [buiold_platform != target_platform]
   host:
     - python
     - pybind11
