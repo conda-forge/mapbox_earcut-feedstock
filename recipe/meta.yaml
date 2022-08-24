@@ -13,19 +13,21 @@ source:
     - 0003-further-removed-m-option.patch
 
 build:
-  number: 2
+  number: 3
   script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
   build:
     - {{ compiler('cxx') }}
     - cmake
-    - numpy
+    - make
+    - python  # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}  # [build_platform != target_platform]
   host:
     - python
     - setuptools_scm
     - setuptools
-    - pip
+    - pip <22
   run:
     - python
     - numpy
