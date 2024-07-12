@@ -1,5 +1,5 @@
 {% set name = "mapbox_earcut" %}
-{% set version = "1.0.0" %}
+{% set version = "1.0.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 997ab14b9afbc14b1aede880b8f57efc7f28d6811a08db0adf1804b63bab0d9b
-
-# leaving these in in case we still need something like that for Windows
-#  patches:
-#    - 0002-removed-A-flag-for-Windows-builds.patch
-#    - 0003-further-removed-m-option.patch
+  sha256: 9f155e429a22e27387cfd7a6372c3a3865aafa609ad725e2c4465257f154a438
 
 build:
   number: 0
@@ -20,11 +15,18 @@ build:
 
 requirements:
   build:
+    - python                                 # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - pybind11                               # [build_platform != target_platform]
     - {{ compiler('cxx') }}
     - cmake
+    - python  # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}  # [build_platform != target_platform]
   host:
     - python
     - pybind11
+    - pip
+    - setuptools
   run:
     - python
     - numpy
