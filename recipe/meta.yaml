@@ -29,7 +29,7 @@ requirements:
     - setuptools
     - numpy >=2
   run:
-    - python
+    - python >=3.9
 
 test:
   requires:
