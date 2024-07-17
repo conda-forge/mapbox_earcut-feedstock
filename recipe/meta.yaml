@@ -30,7 +30,7 @@ requirements:
     - pip
     - pybind11
     - setuptools
-    - numpy
+    - numpy >=2
   run:
     - python
 
