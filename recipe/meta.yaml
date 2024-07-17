@@ -10,30 +10,42 @@ source:
   sha256: 9f155e429a22e27387cfd7a6372c3a3865aafa609ad725e2c4465257f154a438
 
 build:
-  number: 0
+  number: 1
   script: "{{ PYTHON }} -m pip install -vv ."
+  skip: True         # [python_impl == 'pypy']
+  skip: True         # [py<39]
 
 requirements:
   build:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - pybind11                               # [build_platform != target_platform]
+
     - {{ compiler('cxx') }}
+    - {{ stdlib('c') }} # this fails for me :-(
     - cmake
-    - python  # [build_platform != target_platform]
     - cross-python_{{ target_platform }}  # [build_platform != target_platform]
   host:
     - python
-    - pybind11
     - pip
+    - pybind11
     - setuptools
+    - numpy
   run:
     - python
-    - numpy
 
 test:
+  requires:
+    - pytest
+
   imports:
     - mapbox_earcut
+
+  files:
+    - test_earcut.py
+
+  commands:
+    - pytest test_earcut.py
 
 about:
   home: https://github.com/skogler/mapbox_earcut_python
