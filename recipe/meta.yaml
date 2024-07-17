@@ -25,14 +25,16 @@ requirements:
     - {{ stdlib('c') }} # this fails for me :-(
     - cmake
     - cross-python_{{ target_platform }}  # [build_platform != target_platform]
+    - numpy
   host:
     - python
     - pip
     - pybind11
     - setuptools
-    - numpy >=2
+    - numpy
   run:
     - python
+    - {{ pin_compatible('libgd') }}
 
 test:
   requires:
