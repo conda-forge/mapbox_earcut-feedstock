@@ -33,6 +33,7 @@ requirements:
     - pip
     - pybind11
     - scikit-build-core
+    - nanobind
   run:
     - python
     - {{ pin_compatible('libgd') }}
